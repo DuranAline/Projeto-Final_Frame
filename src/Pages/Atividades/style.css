@@ -1,0 +1,22 @@
+.activity-form {
+    margin-bottom: 20px;
+  }
+  
+  .activity-input {
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  .activity-button {
+    padding: 5px 10px;
+  }
+  
+  .activity-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .activity-item {
+    margin-bottom: 10px;
+  }
+  

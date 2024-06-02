@@ -1,0 +1,23 @@
+
+.vital-sign-form {
+    margin-bottom: 20px;
+  }
+  
+  .vital-sign-input {
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  .vital-sign-button {
+    padding: 5px 10px;
+  }
+  
+  .vital-sign-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .vital-sign-item {
+    margin-bottom: 10px;
+  }
+  
