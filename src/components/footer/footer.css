@@ -1,0 +1,17 @@
+/* src/components/footer/style.css */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 10px;
+  transition: transform 0.2s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}

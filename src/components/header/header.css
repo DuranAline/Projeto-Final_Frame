@@ -1,0 +1,19 @@
+/* src/components/header/style.css */
+.header {
+  width: 100%;
+  background-color: #f8f9fa; /* Cor neutra para o header */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  width: 100%;
+}
+
+.nav-link {
+  color: #555 !important;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}

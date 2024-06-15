@@ -1,11 +1,16 @@
+// src/components/header/index.tsx
 import { Link } from 'react-router-dom';
+import './header.css';
 
 export function Header() {
   return (
-    <header className="bg-primary text-white text-center py-3">
-      <nav className="navbar navbar-expand-lg navbar-dark">
+    <header className="header">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">Registro de Atividades Físicas</Link>
+          <Link className="navbar-brand d-flex align-items-center" to="/">
+            <img src="/images/logo.png" alt="Logo" className="logo" />
+            <span>VidaSaudável</span>
+          </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>

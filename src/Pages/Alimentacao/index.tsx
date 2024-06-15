@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addDoc, getDocs, collection, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebaseConnection';
 import Layout from '../../components/layout';
-import './style.css'; 
+import './style.css';
+
 interface NutritionData {
   id: string;
   meal: string;
@@ -93,27 +94,69 @@ export function Nutrition() {
             Finalizar
           </button>
         </form>
-        <section>
-          <h2>Histórico de Alimentação</h2>
-          <ul className="list-group">
-            {nutrition.map((item, index) => (
-              <li key={index} className="list-group-item">
-                {item.meal}: {item.food}
-                <button
-                  className="btn btn-sm btn-warning ml-2"
-                  onClick={() => handleEdit(item.id, item.food, item.meal)}
-                >
-                  Editar
-                </button>
-                <button
-                  className="btn btn-sm btn-danger ml-2"
-                  onClick={() => handleDelete(item.id)}
-                >
-                  Excluir
-                </button>
-              </li>
-            ))}
-          </ul>
+        {nutrition.length > 0 && (
+          <section>
+            <h2>Histórico de Alimentação</h2>
+            <ul className="list-group">
+              {nutrition.map((item, index) => (
+                <li key={index} className="list-group-item">
+                  {item.meal}: {item.food}
+                  <button
+                    className="btn btn-sm btn-warning ml-2"
+                    onClick={() => handleEdit(item.id, item.food, item.meal)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="btn btn-sm btn-danger ml-2"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Excluir
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        <section className="news-section">
+          <h2>Notícias sobre Alimentação Saudável</h2>
+          <div className="news-container">
+            <div className="news-item">
+              <img src="/images/fruta.png" alt="Benefícios de Comer Frutas" className="news-image" />
+              <div className="news-content">
+                <h3>Benefícios de Comer Frutas</h3>
+                <p>As frutas são ricas em vitaminas, minerais e antioxidantes. Elas ajudam a melhorar a saúde do coração, reduzir o risco de doenças crônicas e promover a digestão saudável. Além disso, as frutas são uma excelente fonte de fibras e podem ajudar a manter um peso saudável.</p>
+              </div>
+            </div>
+            <div className="news-item">
+              <img src="/images/leg.png" alt="Importância das Leguminosas na Dieta" className="news-image" />
+              <div className="news-content">
+                <h3>Importância das Leguminosas na Dieta</h3>
+                <p>As leguminosas, como feijões, lentilhas e grão-de-bico, são uma ótima fonte de proteínas, fibras e vitaminas. Elas ajudam a manter a saúde do coração, controlar os níveis de açúcar no sangue e promover a sensação de saciedade. Incluí-las na dieta pode trazer muitos benefícios à saúde.</p>
+              </div>
+            </div>
+            <div className="news-item">
+              <img src="/images/cha.png" alt="Os Benefícios do Chá Verde" className="news-image" />
+              <div className="news-content">
+                <h3>Os Benefícios do Chá Verde</h3>
+                <p>O chá verde é conhecido por suas propriedades antioxidantes e anti-inflamatórias. Ele pode ajudar a melhorar a função cerebral, aumentar a queima de gordura e reduzir o risco de vários tipos de câncer. Beber chá verde regularmente pode contribuir para uma saúde melhor.</p>
+              </div>
+            </div>
+            <div className="news-item">
+              <img src="/images/quinoa.png" alt="Por que Comer Quinoa" className="news-image" />
+              <div className="news-content">
+                <h3>Por que Comer Quinoa</h3>
+                <p>A quinoa é um superalimento rico em proteínas, fibras e nutrientes essenciais. Ela é uma excelente opção para substituir grãos refinados, ajudando a melhorar a digestão, controlar o peso e fornecer energia sustentável. Incluir quinoa na dieta pode trazer muitos benefícios à saúde.</p>
+              </div>
+            </div>
+            <div className="news-item">
+              <img src="/images/verde.png" alt="Benefícios dos Vegetais Verdes" className="news-image" />
+              <div className="news-content">
+                <h3>Benefícios dos Vegetais Verdes</h3>
+                <p>Os vegetais verdes, como espinafre, couve e brócolis, são ricos em vitaminas, minerais e antioxidantes. Eles ajudam a fortalecer o sistema imunológico, melhorar a saúde dos ossos e reduzir o risco de doenças crônicas. Consumir vegetais verdes regularmente é essencial para uma dieta equilibrada e saudável.</p>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
     </Layout>

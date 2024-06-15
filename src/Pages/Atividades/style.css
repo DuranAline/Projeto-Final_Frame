@@ -1,6 +1,9 @@
 
+
 .container {
-  max-width: 800px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
 }
 
 .mb-3 {
@@ -19,4 +22,38 @@
 
 .btn-sm {
   font-size: 0.875rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card h2 {
+  margin: 10px 0;
+  font-size: 1.25rem;
 }
