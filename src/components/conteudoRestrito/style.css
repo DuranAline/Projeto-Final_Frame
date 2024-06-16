@@ -1,0 +1,10 @@
+/* src/components/conteudoRestrito/style.css */
+.restricted-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.restricted-image {
+  max-width: 400px;
+  margin-top: 20px;
+}

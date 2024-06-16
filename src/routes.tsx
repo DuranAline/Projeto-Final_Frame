@@ -1,11 +1,13 @@
+// src/routes.tsx
 import { createBrowserRouter } from 'react-router-dom';
 import Home from './Pages/Home';
 import Reports from './Pages/Relatorios';
-import ReportDetail from './Pages/ReportDetail';
 import VitalSigns from './Pages/SinaisVitais';
 import Activities from './Pages/Atividades';
 import Nutrition from './Pages/Alimentacao';
 import Register from './Pages/Register';
+import Login from './Pages/Login';
+import { RequireAuth } from './components/RequireAuth';
 
 export const router = createBrowserRouter([
   {
@@ -14,26 +16,42 @@ export const router = createBrowserRouter([
   },
   {
     path: '/relatorios',
-    element: <Reports />,
-  },
-  {
-    path: '/relatorio/:id',
-    element: <ReportDetail />,
+    element: (
+      <RequireAuth>
+        <Reports />
+      </RequireAuth>
+    ),
   },
   {
     path: '/sinais-vitais',
-    element: <VitalSigns />,
+    element: (
+      <RequireAuth>
+        <VitalSigns />
+      </RequireAuth>
+    ),
   },
   {
     path: '/atividades',
-    element: <Activities />,
+    element: (
+      <RequireAuth>
+        <Activities />
+      </RequireAuth>
+    ),
   },
   {
     path: '/alimentacao',
-    element: <Nutrition />,
+    element: (
+      <RequireAuth>
+        <Nutrition />
+      </RequireAuth>
+    ),
   },
   {
     path: '/cadastro',
     element: <Register />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);

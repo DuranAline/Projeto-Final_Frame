@@ -1,16 +1,28 @@
+// src/pages/Register/index.tsx
 import React, { useState } from 'react';
-import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 import Layout from '../../components/layout';
 import './style.css';
+
 export function Register() {
-  const { register } = useUser();
+  const { register } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    register(name, gender);
+    try {
+      await register(email, password, name, gender);
+      alert('Cadastro realizado com sucesso!');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert('Erro ao realizar cadastro: ' + error.message);
+      } else {
+        alert('Erro ao realizar cadastro.');
+      }
+    }
   };
 
   return (
@@ -35,6 +47,16 @@ export function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Senha"
                 className="form-control"
                 required
               />

@@ -1,10 +1,12 @@
-
-import { collection, getDocs } from 'firebase/firestore';
+// src/services/dataService.ts
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './firebaseConnection';
 
-export const fetchCollectionData = async (collectionName: string) => {
+export const fetchCollectionData = async (collectionName: string, userId: string | undefined) => {
   try {
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    if (!userId) return [];
+    const q = query(collection(db, collectionName), where('userId', '==', userId));
+    const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error(`Error fetching data from collection ${collectionName}:`, error);
@@ -12,10 +14,10 @@ export const fetchCollectionData = async (collectionName: string) => {
   }
 };
 
-export const fetchReportsData = async () => {
-  const activities = await fetchCollectionData('activities');
-  const vitalSigns = await fetchCollectionData('vitalSigns');
-  const nutrition = await fetchCollectionData('nutrition');
+export const fetchReportsData = async (userId: string | undefined) => {
+  const activities = await fetchCollectionData('activities', userId);
+  const vitalSigns = await fetchCollectionData('vitalSigns', userId);
+  const nutrition = await fetchCollectionData('nutrition', userId);
 
   return [
     { type: 'Atividades', data: activities },

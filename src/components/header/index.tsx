@@ -1,8 +1,24 @@
 // src/components/header/index.tsx
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './header.css';
 
 export function Header() {
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      alert('Logout realizado com sucesso!');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert('Erro ao realizar logout: ' + error.message);
+      } else {
+        alert('Erro ao realizar logout.');
+      }
+    }
+  };
+
   return (
     <header className="header">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -32,6 +48,11 @@ export function Header() {
                 <Link className="nav-link" to="/cadastro">Cadastro</Link>
               </li>
             </ul>
+            {user ? (
+              <button onClick={handleLogout} className="btn btn-outline-danger">Logout</button>
+            ) : (
+              <Link className="btn btn-outline-success" to="/login">Login</Link>
+            )}
           </div>
         </div>
       </nav>
