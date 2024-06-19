@@ -1,4 +1,3 @@
-// src/components/header/index.tsx
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './header.css';

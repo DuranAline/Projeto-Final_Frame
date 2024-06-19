@@ -1,5 +1,4 @@
-// src/components/conteudoRestrito/index.tsx
-import React from 'react';
+import 'react';
 import './style.css';
 
 const ConteudoRestrito: React.FC = () => {

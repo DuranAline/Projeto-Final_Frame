@@ -1,4 +1,3 @@
-// src/components/footer/index.tsx
 import './footer.css';
 
 export function Footer() {

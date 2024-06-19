@@ -1,6 +1,5 @@
-// src/pages/Alimentacao/index.tsx
 import React, { useState, useEffect } from 'react';
-import { addDoc, getDocs, collection, deleteDoc, doc, updateDoc, query, where } from 'firebase/firestore';
+import { addDoc, getDocs, collection, updateDoc, query, where, doc, writeBatch } from 'firebase/firestore';
 import { db } from '../../services/firebaseConnection';
 import { useAuth } from '../../context/AuthContext';
 import './style.css';
@@ -10,6 +9,7 @@ interface NutritionData {
   meal: string;
   food: string;
   userId: string;
+  archived?: boolean;
 }
 
 export function Nutrition() {
@@ -26,7 +26,7 @@ export function Nutrition() {
       await updateDoc(docRef, { food, meal });
       setEditingId(null);
     } else {
-      await addDoc(collection(db, 'nutrition'), { food, meal, userId: user?.uid });
+      await addDoc(collection(db, 'nutrition'), { food, meal, userId: user?.uid, archived: false });
     }
     setFood('');
     fetchNutrition();
@@ -39,11 +39,20 @@ export function Nutrition() {
   };
 
   const handleDelete = async (id: string) => {
-    await deleteDoc(doc(db, 'nutrition', id));
+    const docRef = doc(db, 'nutrition', id);
+    await updateDoc(docRef, { archived: true });
     fetchNutrition();
   };
 
-  const handleFinalize = () => {
+  const handleFinalize = async () => {
+    if (!user) return;
+    const q = query(collection(db, 'nutrition'), where('userId', '==', user.uid), where('archived', '==', false));
+    const querySnapshot = await getDocs(q);
+    const batch = writeBatch(db);
+    querySnapshot.docs.forEach((doc) => {
+      batch.update(doc.ref, { archived: true });
+    });
+    await batch.commit();
     setNutrition([]);
     setFood('');
     setMeal('cafe_da_manha');
@@ -52,7 +61,7 @@ export function Nutrition() {
 
   const fetchNutrition = async () => {
     if (!user) return;
-    const q = query(collection(db, 'nutrition'), where('userId', '==', user.uid));
+    const q = query(collection(db, 'nutrition'), where('userId', '==', user.uid), where('archived', '==', false));
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as NutritionData[];
     setNutrition(data);
@@ -129,7 +138,7 @@ export function Nutrition() {
         </section>
       )}
       <section className="news-section">
-        <h2>Notícias sobre Alimentação Saudável</h2>
+        <h2>Saiba mais sobre Alimentação Saudável</h2>
         <div className="news-container">
           <div className="news-item">
             <img src="/images/fruta.png" alt="Benefícios de Comer Frutas" className="news-image" />

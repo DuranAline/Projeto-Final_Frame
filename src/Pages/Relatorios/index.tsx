@@ -130,7 +130,6 @@ export function Reports() {
         </section>
       )}
       <section className="news-section">
-        <h2>Notícias Relacionadas a Relatórios</h2>
         <div className="news-container">
           <div className="news-item">
             <img src="/images/img1.jpg" alt="A Importância de Ter Relatórios de Saúde" />
